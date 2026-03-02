@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MIDDLE EAST MONITOR</title>
+<meta name="description" content="Free live Middle East conflict monitor — real-time map, news feed, prediction markets, live chat and market ticker."/>
+<meta property="og:title" content="Middle East Monitor — Live Conflict Tracker"/>
+<meta property="og:description" content="Real-time conflict map, live news, predictions and chat."/>
+<meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -13,7 +17,7 @@
 
 <!-- WALKTHROUGH -->
 <div id="wtOverlay" class="wt-overlay" style="display:none">
-  <div class="wt-backdrop" id="wtBackdrop"></div>
+  <div class="wt-backdrop"></div>
   <div class="wt-spotlight" id="wtSpotlight"></div>
   <div class="wt-box" id="wtBox">
     <div class="wt-step" id="wtStep"></div>
@@ -78,27 +82,10 @@
     </div>
   </div>
 
-  <!-- CENTER -->
+  <!-- CENTER: MAP on top, VIDEO on bottom -->
   <div class="center-col" id="centerCol">
 
-    <!-- VIDEO -->
-    <div class="video-section" id="videoBar">
-      <div class="vswitcher">
-        <button class="vsw active" data-src="https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJdpkU4Q&autoplay=1&mute=1">📺 Al Jazeera</button>
-        <button class="vsw" data-src="https://www.youtube.com/embed/live_stream?channel=UC16niRr50-MSBwiO3YDb3RA&autoplay=1&mute=1">📺 BBC</button>
-        <button class="vsw" data-src="custom">🔗 Custom URL</button>
-      </div>
-      <div class="vwrap">
-        <iframe id="videoFrame" src="https://www.youtube.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJdpkU4Q&autoplay=1&mute=1"
-          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-      </div>
-      <div class="custom-row" id="customRow" style="display:none">
-        <input class="curl-input" id="customStreamUrl" placeholder="Paste YouTube live URL..."/>
-        <button class="curl-btn" id="loadCustomStream">LOAD</button>
-      </div>
-    </div>
-
-    <!-- MAP -->
+    <!-- MAP (top) -->
     <div class="map-wrap" id="mapWrap">
       <div id="map"></div>
       <div class="map-legend">
@@ -106,6 +93,30 @@
         <div class="leg"><span class="ld orange"></span>Ground</div>
         <div class="leg"><span class="ld yellow"></span>News</div>
         <div class="leg"><span class="ld zone"></span>Zone</div>
+      </div>
+    </div>
+
+    <!-- VIDEO (bottom) -->
+    <div class="video-section" id="videoBar">
+      <div class="vswitcher">
+        <button class="vsw active" data-channel="aj">📺 Al Jazeera</button>
+        <button class="vsw" data-channel="bbc">📺 BBC</button>
+        <button class="vsw" data-channel="custom">🔗 Custom</button>
+      </div>
+      <div class="vlinks" id="vlinks">
+        <div class="vlinks-label">▶ OPEN LIVE STREAM IN NEW TAB</div>
+        <div class="vlinks-row">
+          <a class="vlink-btn aj" href="https://www.aljazeera.com/live" target="_blank">Al Jazeera Live</a>
+          <a class="vlink-btn bbc" href="https://www.bbc.co.uk/news/av/live/p02nm25c" target="_blank">BBC News Live</a>
+        </div>
+        <div class="vlinks-note">YouTube embeds are blocked by news channels. Use custom URL for your own stream.</div>
+      </div>
+      <div class="custom-row" id="customRow" style="display:none">
+        <input class="curl-input" id="customStreamUrl" placeholder="Paste your YouTube/Twitch embed URL..."/>
+        <button class="curl-btn" id="loadCustomStream">LOAD</button>
+      </div>
+      <div class="vframe-wrap" id="vframeWrap" style="display:none">
+        <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -184,7 +195,6 @@
       <span class="nlabel">AS:</span>
       <input class="ninput" id="nameInput" placeholder="Anonymous" maxlength="20"/>
     </div>
-
   </div>
 </div>
 
